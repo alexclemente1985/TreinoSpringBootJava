@@ -1,5 +1,7 @@
 package br.com.springboot.alexandre.treino.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,7 +19,10 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
+    //@Transient
+    //JsonIgnore: para evitar loop infinito na chamada devido ao relacionamento com produtos
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category(){
