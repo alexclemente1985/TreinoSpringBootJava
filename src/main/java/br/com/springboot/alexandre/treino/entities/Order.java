@@ -1,5 +1,8 @@
 package br.com.springboot.alexandre.treino.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,8 +17,13 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    //Formata o Json para sair com o formato ISO 8601
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant moment;
 
+//Vai mostrar lista de pedidos do cliente
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "clientId")
     private User client;
