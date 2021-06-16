@@ -21,6 +21,7 @@ public class Category implements Serializable {
 
     //@Transient
     //JsonIgnore: para evitar loop infinito na chamada devido ao relacionamento com produtos
+    //ManyToMany -> mappedBy -> irá mapear de acordo com atributo Product.categories
     @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
